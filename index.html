@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetBee</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div class="screen active" id="screen-onboarding">
+            <div class="status-bar status-bar-light">
+                <span>9:41</span>
+                <div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div>
+            </div>
+            <div class="onboarding-bg"></div>
+            <div class="onboarding-overlay"></div>
+            <div class="onboarding-content">
+                <div class="onboarding-logo"><i class="fas fa-crow"></i> BudgetBee</div>
+                <h1 class="onboarding-title">Контролируй деньги легко</h1>
+                <p class="onboarding-subtitle">Планируй расходы, достигай целей и живи свободно.</p>
+            </div>
+            <div class="onboarding-actions">
+                <button class="btn-primary" data-target="screen-register">Начать</button>
+                <button class="btn-secondary-light" data-target="screen-login">У меня уже есть аккаунт</button>
+                <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-register">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-onboarding" style="cursor:pointer;"></i>
+                <h2>Регистрация</h2><div></div>
+            </header>
+            <div class="auth-content">
+                <div class="auth-logo"><i class="fas fa-crow"></i> BudgetBee</div>
+                <h3 class="auth-title">Создайте аккаунт</h3>
+                <p class="auth-subtitle">Начните контролировать финансы уже сегодня</p>
+                <div class="input-group">
+                    <label>Имя</label>
+                    <div class="input-with-icon"><i class="fas fa-user"></i><input type="text" class="input-field" id="regName" placeholder="Дмитрий"></div>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-with-icon"><i class="fas fa-envelope"></i><input type="email" class="input-field" id="regEmail" placeholder="dmitry@mail.ru"></div>
+                </div>
+                <div class="input-group">
+                    <label>Пароль</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="input-field" id="regPassword" placeholder="Минимум 6 символов">
+                        <i class="fas fa-eye toggle-password" data-target="regPassword" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Повторите пароль</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="input-field" id="regPassword2" placeholder="Повторите пароль">
+                        <i class="fas fa-eye toggle-password" data-target="regPassword2" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+                <label class="checkbox-row"><input type="checkbox" id="agreeTerms"><span>Я согласен с <a href="#">условиями</a></span></label>
+                <div class="auth-error" id="regError"></div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="registerBtn">Создать аккаунт</button>
+                    <p class="auth-switch">Уже есть аккаунт? <a data-target="screen-login">Войти</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-login">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-onboarding" style="cursor:pointer;"></i>
+                <h2>Вход</h2><div></div>
+            </header>
+            <div class="auth-content">
+                <div class="auth-logo"><i class="fas fa-crow"></i> BudgetBee</div>
+                <h3 class="auth-title">С возвращением!</h3>
+                <p class="auth-subtitle">Войдите, чтобы продолжить</p>
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-with-icon"><i class="fas fa-envelope"></i><input type="email" class="input-field" id="loginEmail" placeholder="dmitry@mail.ru"></div>
+                </div>
+                <div class="input-group">
+                    <label>Пароль</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="input-field" id="loginPassword" placeholder="Ваш пароль">
+                        <i class="fas fa-eye toggle-password" data-target="loginPassword" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+                <label class="checkbox-row"><input type="checkbox" id="rememberMe"><span>Запомнить меня</span></label>
+                <a class="forgot-link" href="#">Забыли пароль?</a>
+                <div class="auth-error" id="loginError"></div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="loginBtn">Войти</button>
+                    <p class="auth-switch">Нет аккаунта? <a data-target="screen-register">Зарегистрироваться</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-dashboard">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <div class="user-info"><span id="dashboardGreeting">Привет!</span></div>
+                <i class="far fa-bell notification-icon" id="bellBtn" style="cursor:pointer;"></i>
+            </header>
+            <div class="balance-card">
+                <div class="balance-header"><span id="labelBalance">Общий баланс</span><i class="far fa-eye" id="toggleBalance" style="cursor:pointer;"></i></div>
+                <div class="balance-amount" id="balanceAmount">0 BYN</div>
+            </div>
+            <div class="charts-section">
+                <div class="donut-chart" id="donutChart"><div class="donut-inner"><span>Расходы</span><span>за месяц</span></div></div>
+                <div class="chart-legend" id="chartLegend"></div>
+            </div>
+            <div class="income-expense-row">
+                <div class="mini-card income"><span class="label" id="labelIncome">Доходы</span><span class="amount" id="totalIncome">0 BYN</span><span class="trend up">↑ +12%</span></div>
+                <div class="mini-card expense"><span class="label" id="labelExpense">Расходы</span><span class="amount" id="totalExpense">0 BYN</span><span class="trend down">↓ -8%</span></div>
+            </div>
+            <div class="transactions-header"><h3 id="labelRecent">Последние транзакции</h3><a href="#" id="viewAllTransactions">Все ></a></div>
+            <div class="transaction-list" id="transactionList"></div>
+            <nav class="bottom-nav">
+                <div class="nav-item active" data-target="screen-dashboard"><i class="fas fa-home"></i><span id="navMain">Главная</span></div>
+                <div class="nav-item" data-target="screen-add"><i class="fas fa-exchange-alt"></i><span id="navTransactions">Транзакции</span></div>
+                <div class="nav-item" data-target="screen-goals"><i class="fas fa-bullseye"></i><span id="navGoals">Цели</span></div>
+                <div class="nav-item" data-target="screen-profile"><i class="fas fa-user"></i><span id="navProfile">Профиль</span></div>
+                <div class="fab-add" data-target="screen-add"><i class="fas fa-plus"></i></div>
+            </nav>
+        </div>
+
+        <div class="screen" id="screen-all-transactions">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-dashboard" style="cursor:pointer;"></i>
+                <h2>Все транзакции</h2><div></div>
+            </header>
+            <div class="transaction-list" id="allTransactionList" style="padding-bottom: 90px;"></div>
+            <nav class="bottom-nav">
+                <div class="nav-item" data-target="screen-dashboard"><i class="fas fa-home"></i><span>Главная</span></div>
+                <div class="nav-item active" data-target="screen-all-transactions"><i class="fas fa-exchange-alt"></i><span>Транзакции</span></div>
+                <div class="nav-item" data-target="screen-goals"><i class="fas fa-bullseye"></i><span>Цели</span></div>
+                <div class="nav-item" data-target="screen-profile"><i class="fas fa-user"></i><span>Профиль</span></div>
+                <div class="fab-add" data-target="screen-add"><i class="fas fa-plus"></i></div>
+            </nav>
+        </div>
+
+        <div class="screen" id="screen-notifications">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-dashboard" style="cursor:pointer;"></i>
+                <h2>Уведомления</h2><div></div>
+            </header>
+            <div class="notifications-list">
+                <div class="notification-card"><div class="notif-icon yellow"><i class="fas fa-bullseye"></i></div><div class="notif-info"><h4>Цель почти достигнута!</h4><p>Вы накопили 70% на "Подушку безопасности"</p><span class="notif-time">5 мин назад</span></div></div>
+                <div class="notification-card"><div class="notif-icon green"><i class="fas fa-wallet"></i></div><div class="notif-info"><h4>Зарплата зачислена</h4><p>+1 200 BYN на ваш счёт</p><span class="notif-time">2 часа назад</span></div></div>
+                <div class="notification-card"><div class="notif-icon blue"><i class="fas fa-chart-line"></i></div><div class="notif-info"><h4>Отчёт за неделю готов</h4><p>Расходы снизились на 8%</p><span class="notif-time">Вчера</span></div></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-add">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-times close-btn" data-target="screen-dashboard" style="cursor:pointer;"></i>
+                <h2>Новая транзакция</h2><div></div>
+            </header>
+            <div class="type-toggle">
+                <button class="active" data-type="expense">Расход</button>
+                <button data-type="income">Доход</button>
+            </div>
+            <div class="amount-input"><input type="text" id="amountInput" value="50 BYN" inputmode="decimal"></div>
+            <div class="section-title">Категория</div>
+            <div class="category-grid" id="categoryGrid">
+                <div class="cat-item active" data-cat="Еда"><div class="cat-icon"><i class="fas fa-utensils"></i></div><span>Еда</span></div>
+                <div class="cat-item" data-cat="Транспорт"><div class="cat-icon"><i class="fas fa-bus"></i></div><span>Транспорт</span></div>
+                <div class="cat-item" data-cat="Развлечения"><div class="cat-icon"><i class="fas fa-gamepad"></i></div><span>Развлечения</span></div>
+                <div class="cat-item" data-cat="Жильё"><div class="cat-icon"><i class="fas fa-home"></i></div><span>Жильё</span></div>
+                <div class="cat-item" data-cat="Здоровье"><div class="cat-icon"><i class="fas fa-heartbeat"></i></div><span>Здоровье</span></div>
+                <div class="cat-item" data-cat="Одежда"><div class="cat-icon"><i class="fas fa-tshirt"></i></div><span>Одежда</span></div>
+                <div class="cat-item" data-cat="Образование"><div class="cat-icon"><i class="fas fa-graduation-cap"></i></div><span>Образование</span></div>
+                <div class="cat-item" data-cat="Покупки"><div class="cat-icon"><i class="fas fa-shopping-bag"></i></div><span>Покупки</span></div>
+                <div class="cat-item" data-cat="Другое"><div class="cat-icon"><i class="fas fa-ellipsis-h"></i></div><span>Другое</span></div>
+            </div>
+            <div class="input-group"><label>Дата и время</label><input type="datetime-local" class="input-field datetime-input" id="dateInput"></div>
+            <div class="input-group"><label>Заметка</label><input type="text" class="input-field note-input" id="noteInput" placeholder="Введите заметку..."></div>
+            <div class="action-buttons">
+                <button class="btn-primary" id="saveTransaction">Сохранить</button>
+                <button class="btn-secondary" data-target="screen-dashboard">Отмена</button>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-goals">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <h2 id="goalsHeader">Мои цели</h2>
+                <button class="btn-small" id="addGoalBtn">+ Новая цель</button>
+            </header>
+            <div class="goals-list" id="goalsList"></div>
+            <div class="settings-row" id="settingsBtn"><i class="fas fa-cog"></i> Настройки <i class="fas fa-chevron-right"></i></div>
+            <nav class="bottom-nav">
+                <div class="nav-item" data-target="screen-dashboard"><i class="fas fa-home"></i><span>Главная</span></div>
+                <div class="nav-item" data-target="screen-add"><i class="fas fa-exchange-alt"></i><span>Транзакции</span></div>
+                <div class="nav-item active" data-target="screen-goals"><i class="fas fa-bullseye"></i><span>Цели</span></div>
+                <div class="nav-item" data-target="screen-profile"><i class="fas fa-user"></i><span>Профиль</span></div>
+                <div class="fab-add" data-target="screen-add"><i class="fas fa-plus"></i></div>
+            </nav>
+        </div>
+
+        <div class="screen" id="screen-new-goal">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-times close-btn" data-target="screen-goals" style="cursor:pointer;"></i>
+                <h2>Новая цель</h2><div></div>
+            </header>
+            <div class="input-group"><label>Название</label><input type="text" class="input-field" id="goalName" placeholder="Например: Отпуск"></div>
+            <div class="input-group"><label>Целевая сумма (BYN)</label><input type="number" class="input-field" id="goalTarget" placeholder="4000"></div>
+            <div class="input-group"><label>Накоплено (BYN)</label><input type="number" class="input-field" id="goalSaved" placeholder="0"></div>
+            <div class="input-group"><label>Дата окончания</label><input type="date" class="input-field" id="goalDate"></div>
+            <div class="input-group"><label>Иконка</label><input type="text" class="input-field" id="goalIcon" value="🎯" maxlength="2"></div>
+            <div class="input-group"><label>Описание</label><input type="text" class="input-field" id="goalDesc" placeholder="Зачем вам эта цель?"></div>
+            <div class="action-buttons">
+                <button class="btn-primary" id="saveGoal">Сохранить цель</button>
+                <button class="btn-secondary" data-target="screen-goals">Отмена</button>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-settings">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-goals" style="cursor:pointer;"></i>
+                <h2>Настройки</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="settings-item" id="openProfile"><i class="fas fa-user"></i> Профиль <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openNotifications"><i class="fas fa-bell"></i> Уведомления <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openSecurity"><i class="fas fa-lock"></i> Безопасность <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openTheme"><i class="fas fa-palette"></i> Тема <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openLanguage"><i class="fas fa-language"></i> Язык <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openHelp"><i class="fas fa-question-circle"></i> Помощь <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item danger" id="settingsLogout"><i class="fas fa-sign-out-alt"></i> Выйти <i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-security">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-settings" style="cursor:pointer;"></i>
+                <h2>Безопасность</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="settings-item" id="openChangePassword"><i class="fas fa-key"></i> Сменить пароль <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openFingerprint"><i class="fas fa-fingerprint"></i> Вход по отпечатку <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="open2FA"><i class="fas fa-shield-alt"></i> Двухфакторная аутентификация <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openHistory"><i class="fas fa-history"></i> История входов <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openDevices"><i class="fas fa-mobile-alt"></i> Доверенные устройства <i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-change-password">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-security" style="cursor:pointer;"></i>
+                <h2>Смена пароля</h2><div></div>
+            </header>
+            <div class="auth-content">
+                <div class="input-group">
+                    <label>Текущий пароль</label>
+                    <div class="input-with-icon"><i class="fas fa-lock"></i><input type="password" class="input-field" id="oldPassword" placeholder="Текущий пароль"><i class="fas fa-eye toggle-password" data-target="oldPassword" style="cursor:pointer;"></i></div>
+                </div>
+                <div class="input-group">
+                    <label>Новый пароль</label>
+                    <div class="input-with-icon"><i class="fas fa-lock"></i><input type="password" class="input-field" id="newPassword" placeholder="Минимум 6 символов"><i class="fas fa-eye toggle-password" data-target="newPassword" style="cursor:pointer;"></i></div>
+                </div>
+                <div class="input-group">
+                    <label>Повторите новый пароль</label>
+                    <div class="input-with-icon"><i class="fas fa-lock"></i><input type="password" class="input-field" id="newPassword2" placeholder="Повторите"><i class="fas fa-eye toggle-password" data-target="newPassword2" style="cursor:pointer;"></i></div>
+                </div>
+                <div class="auth-error" id="passwordError"></div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="savePasswordBtn">Сохранить</button>
+                    <button class="btn-secondary" data-target="screen-security">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-fingerprint">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-security" style="cursor:pointer;"></i>
+                <h2>Вход по отпечатку</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="fingerprint-hero">
+                    <div class="fingerprint-circle"><i class="fas fa-fingerprint"></i></div>
+                    <p class="fingerprint-text">Используйте отпечаток пальца для быстрого и безопасного входа</p>
+                </div>
+                <div class="toggle-row"><span>Включить вход по отпечатку</span><label class="switch"><input type="checkbox" id="fingerprintToggle"><span class="slider"></span></label></div>
+                <div class="toggle-row"><span>Подтверждать транзакции</span><label class="switch"><input type="checkbox" id="fingerprintTransactions" checked><span class="slider"></span></label></div>
+                <div class="info-text">Отпечаток хранится только на вашем устройстве.</div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-2fa">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-security" style="cursor:pointer;"></i>
+                <h2>Двухфакторная аутентификация</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="toggle-row"><span>Включить 2FA</span><label class="switch"><input type="checkbox" id="twoFAToggle"><span class="slider"></span></label></div>
+                <div class="section-title" style="padding: 20px 0 10px;">Способ подтверждения</div>
+                <div class="theme-option active" data-2fa="sms"><i class="fas fa-sms"></i> SMS на телефон <i class="fas fa-check"></i></div>
+                <div class="theme-option" data-2fa="app"><i class="fas fa-mobile-alt"></i> Приложение-аутентификатор <i class="fas fa-check" style="visibility:hidden;"></i></div>
+                <div class="theme-option" data-2fa="email"><i class="fas fa-envelope"></i> Email <i class="fas fa-check" style="visibility:hidden;"></i></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-history">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-security" style="cursor:pointer;"></i>
+                <h2>История входов</h2><div></div>
+            </header>
+            <div class="notifications-list">
+                <div class="notification-card"><div class="notif-icon green"><i class="fas fa-check-circle"></i></div><div class="notif-info"><h4>Текущий сеанс</h4><p>Chrome · Windows · Минск</p><span class="notif-time">Сейчас</span></div></div>
+                <div class="notification-card"><div class="notif-icon blue"><i class="fas fa-mobile-alt"></i></div><div class="notif-info"><h4>Мобильное приложение</h4><p>Android · Минск</p><span class="notif-time">Вчера, 18:42</span></div></div>
+                <div class="notification-card"><div class="notif-icon purple"><i class="fas fa-laptop"></i></div><div class="notif-info"><h4>Safari · macOS</h4><p>Минск</p><span class="notif-time">3 дня назад</span></div></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-devices">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-security" style="cursor:pointer;"></i>
+                <h2>Доверенные устройства</h2><div></div>
+            </header>
+            <div class="settings-content" id="devicesList">
+                <div class="device-card">
+                    <div class="device-icon current"><i class="fas fa-laptop"></i></div>
+                    <div class="device-info"><h4>Это устройство</h4><p>Chrome · Windows</p><span>Минск · Активно сейчас</span></div>
+                    <span class="device-badge">Текущее</span>
+                </div>
+                <div class="device-card">
+                    <div class="device-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="device-info"><h4>Samsung Galaxy S23</h4><p>Android 14</p><span>Минск · Вчера</span></div>
+                    <button class="device-remove" data-device="Samsung Galaxy S23"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="device-card">
+                    <div class="device-icon"><i class="fas fa-laptop"></i></div>
+                    <div class="device-info"><h4>MacBook Pro</h4><p>Safari · macOS</p><span>Минск · 3 дня назад</span></div>
+                    <button class="device-remove" data-device="MacBook Pro"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-theme">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-settings" style="cursor:pointer;"></i>
+                <h2>Тема</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="theme-option active" data-theme="light"><i class="fas fa-sun"></i> Светлая <i class="fas fa-check"></i></div>
+                <div class="theme-option" data-theme="dark"><i class="fas fa-moon"></i> Тёмная <i class="fas fa-check" style="visibility:hidden;"></i></div>
+                <div class="theme-option" data-theme="system"><i class="fas fa-desktop"></i> Системная <i class="fas fa-check" style="visibility:hidden;"></i></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-language">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-settings" style="cursor:pointer;"></i>
+                <h2>Язык</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="theme-option active" data-lang="ru">🇷🇺 Русский <i class="fas fa-check"></i></div>
+                <div class="theme-option" data-lang="en">🇬🇧 English <i class="fas fa-check" style="visibility:hidden;"></i></div>
+                <div class="theme-option" data-lang="by">🇧🇾 Беларуская <i class="fas fa-check" style="visibility:hidden;"></i></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-help">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-settings" style="cursor:pointer;"></i>
+                <h2>Помощь</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="settings-item" id="openFAQ"><i class="fas fa-question-circle"></i> Частые вопросы <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openManual"><i class="fas fa-book"></i> Руководство пользователя <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openSupportChat"><i class="fas fa-comments"></i> Чат с поддержкой <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openEmail"><i class="fas fa-envelope"></i> support@budgetbee.by <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openPhone"><i class="fas fa-phone"></i> +375 (29) 000-00-00 <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openVideo"><i class="fas fa-video"></i> Видеоуроки <i class="fas fa-chevron-right"></i></div>
+                <div class="settings-item" id="openAbout"><i class="fas fa-info-circle"></i> О приложении <i class="fas fa-chevron-right"></i></div>
+                <div class="help-version">Версия 1.0.0</div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-faq">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-help" style="cursor:pointer;"></i>
+                <h2>Частые вопросы</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="faq-item"><h4><i class="fas fa-question-circle"></i> Как добавить транзакцию?</h4><p>Нажмите жёлтую кнопку «+» на главном экране, выберите категорию, введите сумму и сохраните.</p></div>
+                <div class="faq-item"><h4><i class="fas fa-question-circle"></i> Как создать цель?</h4><p>Откройте раздел «Цели», нажмите «+ Новая цель» и заполните название, сумму и дату.</p></div>
+                <div class="faq-item"><h4><i class="fas fa-question-circle"></i> Как сменить пароль?</h4><p>Настройки → Безопасность → Сменить пароль.</p></div>
+                <div class="faq-item"><h4><i class="fas fa-question-circle"></i> Где хранятся данные?</h4><p>Все данные хранятся локально в браузере. Ничего не отправляется на сервер.</p></div>
+                <div class="faq-item"><h4><i class="fas fa-question-circle"></i> Как сбросить все данные?</h4><p>F12 → Console → <code>localStorage.clear()</code></p></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-manual">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-help" style="cursor:pointer;"></i>
+                <h2>Руководство</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="manual-section"><h3>1. Регистрация</h3><p>Введите имя, email и пароль (минимум 6 символов). После регистрации вы попадёте на главный экран.</p></div>
+                <div class="manual-section"><h3>2. Главный экран</h3><p>Здесь виден общий баланс, диаграмма расходов по категориям и последние транзакции.</p></div>
+                <div class="manual-section"><h3>3. Транзакции</h3><p>Жёлтая кнопка «+» открывает форму добавления. Выберите «Расход» или «Доход».</p></div>
+                <div class="manual-section"><h3>4. Цели</h3><p>Раздел «Цели» позволяет копить на конкретные покупки. Прогресс отображается в процентах.</p></div>
+                <div class="manual-section"><h3>5. Профиль</h3><p>Здесь можно увидеть статистику по неделям/месяцам/годам, топ-3 категории и достижения.</p></div>
+                <div class="manual-section"><h3>6. Настройки</h3><p>Меняйте тему, язык, пароль, настраивайте безопасность и устройства.</p></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-chat">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-help" style="cursor:pointer;"></i>
+                <h2>Чат с поддержкой</h2>
+                <i class="fas fa-download chat-export-btn" id="chatExportBtn" title="Скачать переписку"></i>
+                <i class="fas fa-trash chat-clear-btn" id="chatClearBtn" title="Очистить чат"></i>
+            </header>
+            <div class="chat-quick-btns">
+                <button class="quick-btn" data-quick="Что ты умеешь?">📋 Меню</button>
+                <button class="quick-btn" data-quick="Как добавить транзакцию?">💸 Транзакция</button>
+                <button class="quick-btn" data-quick="Как создать цель?">🎯 Цель</button>
+                <button class="quick-btn" data-quick="Как сменить пароль?">🔐 Пароль</button>
+                <button class="quick-btn" data-quick="Как поменять тему?">🎨 Тема</button>
+                <button class="quick-btn" data-quick="Как поменять язык?">🌐 Язык</button>
+                <button class="quick-btn" data-quick="Где хранятся мои данные?">💾 Данные</button>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-row">
+                <input type="text" id="chatInput" class="input-field" placeholder="Напишите сообщение...">
+                <button class="chat-send" id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-video">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-help" style="cursor:pointer;"></i>
+                <h2>Видеоуроки</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="video-card"><div class="video-thumb" style="background: linear-gradient(135deg,#facc15,#f59e0b);"><i class="fas fa-play"></i></div><div class="video-info"><h4>Начало работы с BudgetBee</h4><p>5 мин · Как зарегистрироваться и настроить приложение</p></div></div>
+                <div class="video-card"><div class="video-thumb" style="background: linear-gradient(135deg,#3b82f6,#2563eb);"><i class="fas fa-play"></i></div><div class="video-info"><h4>Добавление транзакций</h4><p>4 мин · Как правильно вносить расходы и доходы</p></div></div>
+                <div class="video-card"><div class="video-thumb" style="background: linear-gradient(135deg,#22c55e,#16a34a);"><i class="fas fa-play"></i></div><div class="video-info"><h4>Работа с целями</h4><p>6 мин · Как копить на мечту шаг за шагом</p></div></div>
+                <div class="video-card"><div class="video-thumb" style="background: linear-gradient(135deg,#a855f7,#7c3aed);"><i class="fas fa-play"></i></div><div class="video-info"><h4>Анализ расходов</h4><p>7 мин · Как читать графики и статистику</p></div></div>
+                <div class="video-card"><div class="video-thumb" style="background: linear-gradient(135deg,#ef4444,#dc2626);"><i class="fas fa-play"></i></div><div class="video-info"><h4>Безопасность и пароли</h4><p>3 мин · Как защитить свой аккаунт</p></div></div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-about">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header">
+                <i class="fas fa-arrow-left close-btn" data-target="screen-help" style="cursor:pointer;"></i>
+                <h2>О приложении</h2><div></div>
+            </header>
+            <div class="settings-content">
+                <div class="about-hero">
+                    <div class="about-logo"><i class="fas fa-crow"></i></div>
+                    <h2>BudgetBee</h2>
+                    <p>Версия 1.0.0</p>
+                </div>
+                <div class="about-info">
+                    <p>BudgetBee — это приложение для контроля личных финансов. Оно помогает планировать расходы, ставить цели и достигать их.</p>
+                    <p>Все данные хранятся локально в вашем браузере и не передаются на сторонние серверы.</p>
+                    <p>© 2025 BudgetBee. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen" id="screen-profile">
+            <div class="status-bar"><span>9:41</span><div class="status-icons"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></div></div>
+            <header class="header profile-header">
+                <img src="photo_5325588396132474008_y.jpg" alt="Аватар" class="avatar-icon avatar-img">
+                <div class="profile-info"><h3 id="profileName">Пользователь</h3><p id="profileEmail">email@mail.ru</p></div>
+                <i class="fas fa-cog" id="profileSettingsBtn" style="cursor:pointer;"></i>
+            </header>
+            <div class="tabs" id="periodTabs">
+                <button class="active" data-period="week">Неделя</button>
+                <button data-period="month">Месяц</button>
+                <button data-period="year">Год</button>
+            </div>
+            <div class="section-title">Динамика расходов</div>
+            <div class="bar-chart" id="barChart"></div>
+            <div class="bar-chart-labels" id="barChartLabels"></div>
+            <div class="section-title">Топ-3 категории</div>
+            <div class="top-categories">
+                <div class="cat-row">
+                    <div class="cat-icon-circle yellow"><i class="fas fa-utensils"></i></div>
+                    <div class="cat-info"><span>Еда</span><div class="line yellow-line" style="width: 80%;"></div></div><span>950 BYN</span>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-icon-circle green"><i class="fas fa-home"></i></div>
+                    <div class="cat-info"><span>Жильё</span><div class="line green-line" style="width: 60%;"></div></div><span>1 050 BYN</span>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-icon-circle blue"><i class="fas fa-bus"></i></div>
+                    <div class="cat-info"><span>Транспорт</span><div class="line blue-line" style="width: 40%;"></div></div><span>540 BYN</span>
+                </div>
+            </div>
+            <div class="section-title">Достижения</div>
+            <div class="achievements">
+                <div class="achieve-item">🏆<span>Сэкономил 500 BYN</span></div>
+                <div class="achieve-item">📅<span>7 дней подряд</span></div>
+                <div class="achieve-item">🎯<span>Достиг цели</span></div>
+                <div class="achieve-item">⭐<span>Фин. грамотность</span></div>
+            </div>
+            <nav class="bottom-nav">
+                <div class="nav-item" data-target="screen-dashboard"><i class="fas fa-home"></i><span>Главная</span></div>
+                <div class="nav-item" data-target="screen-add"><i class="fas fa-exchange-alt"></i><span>Транзакции</span></div>
+                <div class="nav-item" data-target="screen-goals"><i class="fas fa-bullseye"></i><span>Цели</span></div>
+                <div class="nav-item active" data-target="screen-profile"><i class="fas fa-user"></i><span>Профиль</span></div>
+                <div class="fab-add" data-target="screen-add"><i class="fas fa-plus"></i></div>
+            </nav>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
